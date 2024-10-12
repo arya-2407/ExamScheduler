@@ -12,7 +12,7 @@ def write_file(text,file_path):
         file.write(text)
     file.close()
 
-def get_filepath(url):
+def make_filepath(url):
     match = re.search(r'/course/\d+/(CSC\d+)', url)
     if match:
         course_code = match.group(1)
@@ -27,7 +27,7 @@ def get_filepath(url):
     
 
 
-url='https://heat.csc.uvic.ca/coview/course/2024091/CSC370?unp=t'
+'''url='https://heat.csc.uvic.ca/coview/course/2024091/CSC370?unp=t'
 text=fetch_html(url)
 file_path=get_filepath(url)
-write_file(text,file_path)
+write_file(text,file_path)'''
