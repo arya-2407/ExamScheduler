@@ -3,6 +3,7 @@ from openai import OpenAI
 from scrapper import *
 from dotenv import load_dotenv
 from flask import Flask, render_template, request
+import json
 
 app = Flask(__name__)
 
@@ -29,7 +30,8 @@ def generate_response(information):
         model="gpt-4"
     )
     response=chat_completion.choices[0].message.content
-    return response
+    response_dict=json.loads(response)
+    return response_dict
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
