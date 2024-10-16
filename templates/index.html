@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>URL Input</title>
+    <title>Course Dates</title>
     <style>
         body {
             display: flex;
@@ -26,6 +26,22 @@
         .error {
             color: red;
         }
+
+        table {
+            width: 50%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
     </style>
 </head>
 <body>
@@ -39,6 +55,45 @@
         <!-- Display error message if an invalid URL is submitted -->
         {% if error %}
             <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <!-- Display table with midterm and assignment dates if the response is present -->
+        {% if response %}
+            <h2>Course Important Dates</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Midterm Dates</th>
+                        <th>Assignment Due Dates</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            {% if response.midterm %}
+                                <ul>
+                                    {% for date in response.midterm %}
+                                        <li>{{ date }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p>No midterm dates available</p>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if response.assignment %}
+                                <ul>
+                                    {% for date in response.assignment %}
+                                        <li>{{ date }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p>No assignment due dates available</p>
+                            {% endif %}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         {% endif %}
     </div>
 </body>

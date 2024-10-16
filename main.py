@@ -15,7 +15,7 @@ def is_valid_url(url):
 def main(url):
     information=fetch_html(url=url)
     response=generate_response(information=information)
-    print(response)
+    return response
 
 def generate_response(information):
     load_dotenv()
