@@ -7,6 +7,11 @@ import json
 
 app = Flask(__name__)
 
+URL_REGEX = r'^https://heat\.csc\.uvic\.ca/coview/course/\d{7}/CSC\d{3}(\?unp=t)?$'
+
+def is_valid_url(url):
+    return re.match(URL_REGEX,url) is not None
+
 def main(url):
     information=fetch_html(url=url)
     response=generate_response(information=information)
@@ -37,11 +42,15 @@ def generate_response(information):
 def index():
     url = None
     response=None
+    error=None
     if request.method == 'POST':
         url = request.form.get('url')  # Get URL from form
         if url:
-            response = main(url)  # Call main function with the URL
-    return render_template('index.html', url=url, response=response)
+            if is_valid_url(url=url):
+                response = main(url)  # Call main function with the URL
+            else:
+                error="Invalid URL"
+    return render_template('index.html', url=url, response=response, error=error)
 
 
 if __name__ == "__main__":

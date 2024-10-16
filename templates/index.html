@@ -4,15 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>URL Input</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 <body>
-    <h1>Enter a URL</h1>
-    <form method="POST">
-        <input type="text" name="url" placeholder="Enter a URL" required>
-        <button type="submit">Submit</button>
-    </form>
-    {% if url %}
-        <h2>You entered: {{ url }}</h2>
-    {% endif %}
+    <div class="container">
+        <h1>Enter Course Outline URL</h1>
+        <form method="POST">
+            <input type="text" name="url" placeholder="Enter a URL" required>
+            <button type="submit">Submit</button>
+        </form>
+
+        <!-- Display error message if an invalid URL is submitted -->
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+    </div>
 </body>
 </html>
